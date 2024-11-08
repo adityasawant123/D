@@ -1,0 +1,18 @@
+Ass 1 c1
+ 	Time Complexity: 𝑂(n)
+	Space Complexity: 𝑂(1)
+          c2
+	     Time Complexity:O(n)
+	     Space Complexity:O(n)
+Ass 2
+	Time Complexity:O(n+dlogd)
+ 	Space Complexity:𝑂(𝑛+𝑑)
+ASS 3
+	Time Complexity:O(n log n)
+	Space Complexity:O(n)
+ASS 4
+	Time Complexity:O(n x capacity)
+	Space Complexity:O(n X capacity)
+ASS 5
+	Time Complexity:O(N!)
+	Space Complexity:O(N x N!)

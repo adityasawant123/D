@@ -1,0 +1,20 @@
+import java.util.*;
+public class Fibonacci {
+    public static int fibonacci(int n) {
+        // Base cases
+        if (n <= 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+        // Recursive case: Sum of the two previous Fibonacci numbers
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number: ");
+        int n = sc.nextInt();
+        System.out.println("The " + n + "th Fibonacci number is: " + fibonacci(n));
+    }
+}

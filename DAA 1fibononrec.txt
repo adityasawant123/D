@@ -1,0 +1,31 @@
+public class FibonacciSeries {
+    public static void printFibonacciSeries(int n) {
+        // Edge case
+        if (n <= 0) {
+            System.out.println("Please enter a positive integer.");
+            return;
+        }
+
+        // Initialize base values for the first two numbers in the series
+        int a = 0, b = 1;
+
+        System.out.print("Fibonacci Series up to " + n + ": ");
+        
+        // Print the first number in the series
+        System.out.print(a);
+        
+        // Loop to calculate and print each Fibonacci number up to n terms
+        for (int i = 1; i < n; i++) {
+            System.out.print(", " + b);
+            int next = a + b;
+            a = b;
+            b = next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int n = 11;  // Number of terms to print in the Fibonacci series
+        printFibonacciSeries(n);
+    }
+}
