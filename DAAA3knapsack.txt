@@ -1,0 +1,69 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+class FractionalKnapsack {
+    // Class to represent an item with value and weight
+    static class ItemValue {
+        double value;
+        double weight;
+
+        ItemValue(double value, double weight) {
+            this.value = value;
+            this.weight = weight;
+        }
+    }
+
+    // Method to get the maximum value of the knapsack
+    static double fractionalKnapsack(int capacity, ItemValue[] items, int n) {
+        double totalValue = 0.0;
+
+        // Sorting items based on value-to-weight ratio in descending order
+        Arrays.sort(items, (a, b) -> Double.compare(b.value / b.weight, a.value / a.weight));
+
+        for (int i = 0; i < n; i++) {
+            // If the full item can be taken, take it
+            if (capacity >= items[i].weight) {
+                capacity -= items[i].weight;
+                totalValue += items[i].value;
+            } else {
+                // Take the fraction of the remaining capacity
+                totalValue += (items[i].value / items[i].weight) * capacity;
+                break;
+            }
+        }
+
+        return totalValue;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Taking input for the capacity of the knapsack
+        System.out.print("Enter the capacity of the knapsack: ");
+        int capacity = scanner.nextInt();
+
+        // Taking input for the number of items
+        System.out.print("Enter the number of items: ");
+        int n = scanner.nextInt();
+
+        // Creating an array to store item values and weights
+        ItemValue[] items = new ItemValue[n];
+
+        // Taking input for each item's value and weight
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter value of item " + (i + 1) + ": ");
+            double value = scanner.nextDouble();
+
+            System.out.print("Enter weight of item " + (i + 1) + ": ");
+            double weight = scanner.nextDouble();
+
+            items[i] = new ItemValue(value, weight);
+        }
+
+        // Calculating the maximum value achievable
+        double maxValue = fractionalKnapsack(capacity, items, n);
+        System.out.println("Maximum value: " + maxValue);
+
+        scanner.close();
+    }
+}
