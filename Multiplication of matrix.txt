@@ -1,0 +1,51 @@
+row1 = int(input("Enter the number of rows:"))
+col1 = int(input("Enter the number of columns:"))
+c = 0
+
+matrixa = []
+matrixb = []
+resultmatrix = []
+print("Enter the entries rowwise:")
+# For user input
+print("Enter the entries for matrix A:\n")
+for i in range(row1):
+    a = []
+    for j in range(col1):
+        a.append(int(input()))
+    matrixa.append(a)
+print(matrixa)
+print("matrix is:")
+
+for i in range(row1):
+    for j in range(col1):
+        print(format(matrixa[i][j],"<3"), end=" ")
+    print()
+print("Enter entries for matrix B:\n")
+row2 = int(input("Enter the number of rows:"))
+col2 = int(input("Enter the number of columns:"))
+for i in range(row2): 
+    a = []
+    for j in range(col2):
+        a.append(int(input()))
+    matrixb.append(a)
+print("matrix is:")
+
+for i in range(row2):
+    for j in range(col2):
+        print(format(matrixb[i][j],"<3"), end=" ")
+    print()
+
+for i in range(row1):
+    a = []
+    for j in range(col2):
+        for k in range(row2):
+            c = c + matrixa[i][k] * matrixb[k][j]
+        a.append(c)
+        c = 0
+    resultmatrix.append(a)
+print("Result matrix for Multiplication is:")
+
+for i in range(row1):
+    for j in range(col2):
+        print(format(resultmatrix[i][j],"<3"), end=" ")
+    print()

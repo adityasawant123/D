@@ -1,0 +1,41 @@
+str1=input("Enter the string To display word with the longest length \n")
+
+list1=str1.split()
+m=0
+word=0
+print(list1)
+for i in range(len(list1)):
+    if m<len(list1[i]):
+        m=len(list1[i])
+        word=i
+print("The word with longest length:- ",list1[word])
+
+string=input(("Enter a string:"))  
+if(string==string[::-1]):              
+      print("The string is a palindrome")  
+else:  
+      print("The string is not a palindrome")  
+
+str1 = input("Enter the string to count frequency of occurrence of particular character \n")
+char = input("Enter character:- ")
+counter = 0
+for i in range(len(str1)):
+
+  if char == str1[i]:
+        counter += 1          
+
+print("Character ",char," is present ",counter," times in string ",str1)
+str1 = input("Enter input string :")
+str1= str1.split()        
+i=0
+while i<len(str1):
+    count=0
+    for j in str1:
+        if str1[i]==j:
+            count=count+1
+    print(str1[i],count)
+    i=i+1
+str1 = input("Enter the string To display index of first appearance of the substring:- \n")
+sub1 = input("Enter substring:- \n")
+index=str1.find(sub1)
+print(index)

@@ -1,0 +1,84 @@
+#include<stdlib.h>
+#include <iostream>
+using namespace std;
+typedef struct node
+{
+int prn;
+	char name[10];                         
+	struct node *next;
+}node;
+class student
+{
+public:
+	node *create();
+	void print(node *HEAD);	
+};
+node *student::create()
+{
+	node *head,*p;
+	int i,n;
+        head=NULL;
+	cout<<"\n Enter the no of node:"<<endl;
+	cin>>n;
+	head=new node;            
+	head->next=NULL;
+	cout<<"\n Enter the student prn no and name:"<<endl;
+	cin>>head->prn>>head->name;                               
+	p=head;   
+for(i=1;i<n;i++)
+	{
+		cout<<"\nStudent"<<i+1<<"prn no. and name";
+		p->next=new node;
+			p=p->next;                                     
+                                 p->next=NULL;
+		    cin>>p->prn>>p->name;
+	}
+	return (head);
+}
+
+
+void student::print(node *HEAD)
+
+{
+node *p;
+cout<<"list of student ";
+for(p=HEAD;p!=NULL;p=p->next)
+{
+	cout<<"\n";
+cout<<p->prn<<"\t"<<p->name;
+}
+
+}
+int main()
+{
+	int n,m,ch;
+	node *head=NULL;
+	student s;
+	do
+	{
+		cout<<"\n Main menu";
+		cout<<"\n 1.Create club:";
+		cout<<"\n 2.Display members of club:";
+		
+		cout<<"\n 3.Quit.";
+		cout<<"\n Enter your choice:";
+		cin>>m;
+
+		switch(m)
+		{
+
+		case 1:
+			head=s.create();
+			break;
+		case 2:
+			s.print(head);
+			break;
+			case 3:
+				exit(0);
+				break;
+			default:
+				cout<<"\n Invalid choice.";
+         }
+	}while(m!=3);
+	return 0;
+}

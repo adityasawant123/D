@@ -1,0 +1,37 @@
+def partition(array,low,high):
+    pivot=array[low]
+    i=low+1
+    j=high
+    flag=False
+    while(not flag):
+        while(i<=j and array[i]<=pivot):
+            i=i+1
+        while(i<=j and array[j]>=pivot):
+            j=j-1;
+        if(j<i):
+            flag=True
+        else:
+            temp=array[low]
+            array[i]=array[j]
+            array[j]=temp
+    temp=array[low]
+    array[low]=array[j]
+    array[j]=temp    
+    return j
+
+def Quick(array,low,high):
+    if (low<high):
+        m = partition(array,low,high)
+        Quick(array,low,m-1)
+        Quick(array,m+1,high)
+
+array=[]
+n=int(input("enter the number of element:"))
+for i in range(0,n):
+    element=int(input("Enter the element:"))
+    array.append(element)
+print(" Array is:")
+print(array)
+print("sorted array is")
+Quick(array,0,n-1)
+print(array)
