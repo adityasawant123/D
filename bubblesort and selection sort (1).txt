@@ -1,0 +1,41 @@
+def bubblesort(arr):
+    for i in range(len(arr)):
+        for j in range(0,len(arr)-i-1):
+            if(arr[j]>arr[j+1]):
+                temp=arr[j]
+                arr[j]=arr[j+1]
+                arr[j+1]=temp
+
+def selectionsort(array):
+    for i in range(len(array)):
+        min=i
+        for j in range(i+1,len(array)):
+            if(array[j]<array[min]):
+                min=j
+                temp=array[i]
+                array[i]=array[min]
+                array[min]=temp
+array=[]
+n=int(input("enter the number of element:"))
+for i in range(0,n):
+    element=int(input())
+    array.append(element)
+print(array)
+print("\n")
+print("choose the following")
+print("1:Bubble sort\n2:selection sort\n")
+choice=int(input("enter your choice: "))
+if choice==1:
+    print(" Array is:")
+    print(array)
+    print("sorted array is")
+    bubblesort(array)
+    print(array)
+elif choice==2:
+    print(" Array is:")
+    print(array)
+    print("sorted array is")
+    selectionsort(array)
+    print(array)
+else:
+    print("enter the valid number")
