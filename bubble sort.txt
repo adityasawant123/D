@@ -1,0 +1,61 @@
+#include <iostream>
+#include <omp.h>
+using namespace std;
+
+// Swap two values
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+// Sequential Bubble Sort
+void bubble_sequential(int a[], int n) {
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n - 1; j++)
+            if (a[j] > a[j + 1])
+                swap(a[j], a[j + 1]);
+}
+
+// Parallel Bubble Sort using even-odd transposition
+void bubble_parallel(int a[], int n) {
+    for (int i = 0; i < n; i++) {
+        int start = i % 2;
+        #pragma omp parallel for
+        for (int j = start; j < n - 1; j += 2)
+            if (a[j] > a[j + 1])
+                swap(a[j], a[j + 1]);
+    }
+}
+
+int main() {
+    int n, choice;
+    cout << "1. Sequential Sort\n2. Parallel Sort\nEnter choice: ";
+    cin >> choice;
+
+    if (choice != 1 && choice != 2) {
+        cout << "Invalid choice!\n";
+        return 0;
+    }
+
+    cout << "Enter number of elements: ";
+    cin >> n;
+    int *a = new int[n];
+    
+    cout << "Enter elements:\n";
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+
+    if (choice == 1)
+        bubble_sequential(a, n);
+    else
+        bubble_parallel(a, n);
+
+    cout << "Sorted array:\n";
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+    cout << endl;
+
+    delete[] a;
+    return 0;
+}

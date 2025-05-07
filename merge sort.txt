@@ -1,0 +1,91 @@
+merge salt
+
+#include <iostream>
+#include <omp.h>
+using namespace std;
+
+// Merge two halves of the array
+void merge(int *a, int low, int mid, int high) {
+    int *temp = new int[high - low + 1];
+    int i = low, j = mid + 1, k = 0;
+
+    // Merge the two halves
+    while (i <= mid && j <= high) {
+        temp[k++] = (a[i] <= a[j]) ? a[i++] : a[j++];
+    }
+
+    // Copy remaining elements
+    while (i <= mid) temp[k++] = a[i++];
+    while (j <= high) temp[k++] = a[j++];
+
+    // Copy back to the original array
+    for (int i = low, k = 0; i <= high; ++i, ++k)
+        a[i] = temp[k];
+
+    delete[] temp;
+}
+
+// Sequential Merge Sort
+void merge_sort_sequential(int *a, int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+        merge_sort_sequential(a, low, mid);
+        merge_sort_sequential(a, mid + 1, high);
+        merge(a, low, mid, high);
+    }
+}
+
+// Parallel Merge Sort
+void merge_sort_parallel(int *a, int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+
+        // Parallelize recursive calls
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            merge_sort_parallel(a, low, mid);
+
+            #pragma omp section
+            merge_sort_parallel(a, mid + 1, high);
+        }
+
+        merge(a, low, mid, high);
+    }
+}
+
+int main() {
+    int *a, n, choice;
+
+    cout << "Choose sorting method: \n1. Sequential Merge Sort\n2. Parallel Merge Sort\n3. Exit\nEnter choice: ";
+    cin >> choice;
+
+    if (choice == 1 || choice == 2) {
+        cout << "Enter total number of elements: ";
+        cin >> n;
+
+        a = new int[n];
+        cout << "Enter elements: ";
+        for (int i = 0; i < n; i++)
+            cin >> a[i];
+
+        // Call the appropriate merge sort
+        if (choice == 1)
+            merge_sort_sequential(a, 0, n - 1);
+        else
+            merge_sort_parallel(a, 0, n - 1);
+
+        cout << "Sorted array: ";
+        for (int i = 0; i < n; i++)
+            cout << a[i] << " ";
+        cout << endl;
+
+        delete[] a;  // Free memory
+    } else if (choice == 3) {
+        cout << "Exiting the program..." << endl;
+    } else {
+        cout << "Invalid choice! Exiting program..." << endl;
+    }
+
+    return 0;
+}
